@@ -1,10 +1,9 @@
-defmodule Blog.Post do
+defmodule Blog.Comment do
   use Blog.Web, :model
 
-  schema "posts" do
-    field :title, :string
+  schema "comments" do
     field :body, :string
-    has_many :comments, Blog.Comment
+    belongs_to :post, Blog.Post
 
     timestamps()
   end
@@ -14,7 +13,7 @@ defmodule Blog.Post do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :body])
-    |> validate_required([:title, :body])
+    |> cast(params, [:body])
+    |> validate_required([:body])
   end
 end
